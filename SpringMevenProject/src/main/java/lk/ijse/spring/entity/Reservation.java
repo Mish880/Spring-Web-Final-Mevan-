@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,9 +17,17 @@ import javax.persistence.Id;
 public class Reservation {
     @Id
     private String resid;
-    private String resdate;
-    private String returndate;
+    private LocalDate date;
     private int noofdays;
-    private String canceldetail;
     private String pickupdate;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "driverId",referencedColumnName = "Did",insertable = false,updatable = false)
+    private Driver driver;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicleId",referencedColumnName = "vid",insertable = false,updatable = false)
+    private Vehicle vehicle;
 }
