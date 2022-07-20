@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Orderguestcustomer_PK {
-    private String resid;
-    private String Gueid;
+public class OrderVehicle_PK implements Serializable {
+     private String resid;
+     private String vid;
+
+
 }
