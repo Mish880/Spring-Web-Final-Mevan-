@@ -11,10 +11,8 @@ import lombok.ToString;
 @ToString
 
 public class RentDto {
-    private String rentid;
-    private String paydate;
-    private String damages;
-    private double totalpay;
-    private double paymethod;
-    private double downpay;
+   private String resid;
+   private String vid;
+   private String date;
+   private double unitprice;
 }

@@ -20,6 +20,7 @@ public class Rent {
     @Id
     private String vid;
     private String date;
+    private double unitprice;
 
     //Out-Verse
     @ManyToOne
