@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Motive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Mishel Perera" name="author">
+    <link rel="icon" href="assets/images/DashIcone.png">
+    <link rel="stylesheet" href="assets/BootStrap/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="assets/images/DashIcone.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            AUTOMOTIVE
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="homeBtn">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="guestcustomer.html" id="guestCustomerBtn">GUESTCUSTOMER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="regcustomer.html" id="regCustomerBtn">REGCUSTOMER</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="vehicle.html" id="VehicleBtn">VEHICLE</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="driver.html" id="DriverBtn">DRIVER</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-sm btn-outline-info" type="button">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section class="container-fluid mt-3">
+    <section class="row mt-3 justify-content-around">
+        <div class="col-12 col-md-4">
+            <h1 class="text-secondary"> Add Vehicle Form</h1>
+            <div class="mb-3">
+                <form class="d-flex">
+                    <label class="form-label" for="txtSearchCusID">Search Vehicle</label>
+                    <input class="form-control" id="txtSearchCusID" placeholder="Vehicle ID,Type" type="text">
+
+                </form>
+            </div>
+            <div class="mb-3">
+                <div class="card" style="width: 24rem;">
+                    <img src="assets/images/Vehicle.jpg" class="card-img-top" alt="Error loading image">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Vehicle Details</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-5">
+            <form class ="Vehicleform">
+            <button class="btn btn-primary" id="btnSaveVehicle">Add New Vehicle Details</button>
+            <button class="btn btn-success" id="btnSearchVehicle">Search Vehicle</button>
+            <button class="btn btn-warning" id="btnUpdate">Update Vehicle</button>
+            <div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtvehicleID">Vehicle ID</label>
+                    <input class="form-control" id="txtvehicleID" name="vid" placeholder="Vehicle ID" type="text">
+                    <p><small class="text-danger pl-1" id="lblvehicleid"></small></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtvehicletype">Vehicle Type</label>
+                    <input class="form-control" id="txtvehicletype" name="vtype" placeholder="Vehicle Type" type="text">
+                    <p><small class="text-danger pl-1" id="lblvehicletype"></small></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtvehiclebrand">Vehicle Brand</label>
+                    <input class="form-control" id="txtvehiclebrand" name="vbrand" placeholder="Vehice Brand" type="text">
+                    <p><small class="text-danger pl-1" id="lblvehiclebrand"></small></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtPasssengers">Number of Passengers</label>
+                    <input class="form-control" id="txtPasssengers" name="passanger" placeholder="No. of Passengers" type="text">
+                    <p><small class="text-danger pl-1" id="lblvehiclepassengers"></small></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtFueltype">Fuel Type</label>
+                    <input class="form-control" id="txtFueltype" name="fualtype" placeholder="Fuel Type" type="text">
+                    <p><small class="text-danger pl-1" id="lblfueltype"></small></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="txtTransmissiontype">Transmission Type</label>
+                    <input class="form-control" id="txtTransmissiontype" name="transmissiontype" placeholder="Transmission Type" type="text">
+                    <p><small class="text-danger pl-1" id="lblTransmissiontype"></small></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="btnDeleteVehicle" type="submit">Delete</button>
+                    <button class="btn btn-secondary" id="btnClearDeleteVehiclesFormFields" type="reset">Clear</button>
+                </div>
+            </div>
+            </form>
+        </div>
+
+    </section>
+
+    <section class="row mt-4">
+        <div class="col">
+            <table class="table table-bordered table-hover mt-3">
+                <thead class="bg-danger text-white">
+                <tr class="table-success">
+                    <th scope="col">Id</th>
+                    <th scope="col">Vehicle Type</th>
+                    <th scope="col">Vehicle Brand</th>
+                    <th scope="col">No.of Passengers</th>
+                    <th scope="col">Fuel Type</th>
+                    <th scope="col">Transmission Type</th>
+                </tr>
+                </thead>
+                <tbody id="vehTable">
+
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</section>
+
+<script src="assets/BootStrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/JQuery/jquery-3.6.0.min.js"></script>
+<script>
+     var baseVehicleUrl = "http://localhost:8080/SpringMevenProject_war/vehicle"
+
+    $("#btnSaveVehicle").click(function () {
+          SaveVehicle();
+    });
+
+     function SaveVehicle() {
+         var data = $("#Vehicleform").serialize();
+         $.ajax({
+             url:baseVehicleUrl,
+             method:"POST",
+             data:data,
+             success: function (res) {
+                 if (res.code == 200) {
+                     alert("Successfully Vehicle Registered");
+                 }
+             },
+             error: function (ob) {
+                  alert(ob.responseJSON.message);
+
+             }
+         });
+
+     }
+
+</script>
+</body>
+</html>
