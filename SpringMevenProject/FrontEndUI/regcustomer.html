@@ -72,8 +72,8 @@
         <div class="col-12 col-md-5">
             <form id="RegCustomerFrom">
             <button class="btn btn-primary" id="btnSaveCustomer">Add New Customer Details</button>
-            <button class="btn btn-success" id="btnGetAllCustomer">Get All Customer</button>
-            <button class="btn btn-warning" id="btnUpdate">Update Customer</button>
+            <button class="btn btn-success" type="button" id="btnGetAllCustomer">Get All Customer</button>
+            <button class="btn btn-warning" id="btnRegCustomerUpdate">Update Customer</button>
             <div>
 
                 <div class="mb-3">
@@ -138,15 +138,6 @@
                 </tr>
                 </thead>
                 <tbody id="RegcusTable">
-                   <tr>
-                       <td></td>
-                       <td></td>
-                       <td></td>
-                       <td></td>
-                       <td></td>
-                       <td></td>
-
-                   </tr>
 
 
                 </tbody>
@@ -166,6 +157,7 @@
       });
 
       $("#btnGetAllCustomer").click(function () {
+          console.log("click");
           loadAllCustomers();
       });
 
@@ -173,9 +165,39 @@
           deleteCustomer();
       });
 
-    loadAllCustomers();
+      $("#btnRegCustomerUpdate").click(function () {
+           UpdateCustomer();
+      });
 
 
+
+
+     //Bind click events to the table rows
+        function bindClickEvents() {
+            $("#RegcusTable>tr").click(function () {
+              // This is Get values to the selected row
+                let Regid = $(this).children().eq(0).text();
+                let Regname = $(this).children().eq(1).text();
+                let Regaddress = $(this).children().eq(2).text();
+                let Regemail = $(this).children().eq(3).text();
+                let Regcontact = $(this).children().eq(4).text();
+                let RegNIC = $(this).children().eq(5).text();
+
+                //Set values to the text-fields
+                $("#txtRegCusID").val(Regid);
+                $("#txtRegCusName").val(Regname);
+                $("#txtRegAddress").val(Regaddress);
+                $("#txtRegEmail").val(Regemail);
+                $("#txtRegContact").val(Regcontact);
+                $("#txtRegNIC").val(RegNIC);
+
+            });
+
+        }
+
+
+
+     //saveCustomer
     function saveRegCustomer() {
            var data =  $("#RegCustomerFrom").serialize(); // return query string of from with name: type - value
              $.ajax({
@@ -203,10 +225,13 @@
             url:basecustomer,
             method:"GET",
             /*dataType:This is a Json,Please Convert the json */
+
             success: function(resp) {
+
                 for (const regcustomer of resp.data){
-                    let row = `<tr><td>${regcustomer.Regid}</td><td>${regcustomer.Regname}</td><td>${regcustomer.Regaddress}</td><td>${regcustomer.Regemail}</td><td>${regcustomer.Regcontact}</td><td>${regcustomer.RegNIC}</td></tr>`;
+                   let row = `<tr> <td>${regcustomer.Regid}</td> <td>${regcustomer.Regname}</td> <td>${regcustomer.Regaddress}</td><td>${regcustomer.Regemail}</td><td>${regcustomer.Regcontact}</td><td>${regcustomer.RegNIC}</td></tr>`;
                     $("#RegcusTable").append(row);
+
                 }
             },
             error :  function (ob) {
@@ -215,7 +240,7 @@
             }
         });
     }
-
+     // deletecustomer
     function deleteCustomer() {
         let regcustomerID = $("#txtCusID").val();
 
@@ -236,6 +261,37 @@
               }
          });
     }
+
+      //Update Customer
+     function  UpdateCustomer(){
+       var cusDb = {
+           Regid : $("#txtRegCusID").val(),
+           Regname : $("#txtRegCusName").val(),
+           Regaddress : $("#txtRegAddress").val(),
+           Regemail : $("#txtRegEmail").val(),
+           Regcontact : $("#txtRegContact").val(),
+           RegNIC  : $("#txtRegNIC").val()
+       }
+
+       $.ajax({
+           url:basecustomer,
+           method : "PUT",
+           contentType: "application/json",
+           data : JSON.stringify(cusDb),
+           success : function (res) {
+            if (res.code == 200) {
+                 alert("Successfully Updated");
+                 loadAllCustomers();
+                 clearForm();
+            }
+           },
+           error : function (ob) {
+                alert(ob.responseJSON.message);
+           }
+
+       });
+
+     }
 
     function clearForm(){
         $("#txtRegCusID").val("");
