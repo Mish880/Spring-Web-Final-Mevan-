@@ -26,7 +26,7 @@ public class RegCustomerServiceImpl implements RegCustomerService {
         if (!repo.existsById(dto.getRegid())) {
             repo.save(mapper.map(dto, RegCustomer.class));
         } else {
-            throw new RuntimeException("Reg Customer Already Exist..!");
+            throw new RuntimeException("reg Customer Already Exist..!");
         }
 
     }
@@ -36,7 +36,7 @@ public class RegCustomerServiceImpl implements RegCustomerService {
         if (repo.existsById(id)) {
             repo.deleteById(id);
         } else {
-            throw new RuntimeException("Please check the RegCustomer ID.. No Such RegCustomer..!");
+            throw new RuntimeException("Please check the regCustomer ID.. No Such RegCustomer..!");
         }
     }
 

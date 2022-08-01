@@ -16,11 +16,11 @@ import javax.persistence.Id;
 @ToString
 public class RegCustomer {
     @Id
-    private String Regid;
-    private String Regname;
-    private String Regaddress;
-    private String Regemail;
-    private String Regcontact;
-    private String RegNIC;
+    private String regid;
+    private String regname;
+    private String regaddress;
+    private String regemail;
+    private String regcontact;
+    private String regNIC;
 
 }

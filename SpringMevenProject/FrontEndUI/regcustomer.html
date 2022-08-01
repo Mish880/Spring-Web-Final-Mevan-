@@ -51,8 +51,8 @@
             <h1 class="text-secondary"> Register Customer Form</h1>
             <div class="mb-3">
                 <form class="d-flex">
-                    <label class="form-label" for="txtSearchCusID">Search Customer</label>
-                    <input class="form-control" id="txtSearchCusID" placeholder="Customer ID,NIC,Name" type="text">
+                    <label class="form-label" for="txtSearchRegCusID">Search Customer</label>
+                    <input class="form-control" id="txtSearchRegCusID" placeholder="Customer ID" type="text">
 
                 </form>
             </div>
@@ -71,51 +71,51 @@
 
         <div class="col-12 col-md-5">
             <form id="RegCustomerFrom">
-            <button class="btn btn-primary" id="btnSaveCustomer">Add New Customer Details</button>
-            <button class="btn btn-success" type="button" id="btnGetAllCustomer">Get All Customer</button>
-            <button class="btn btn-warning" id="btnRegCustomerUpdate">Update Customer</button>
+            <button class="btn btn-primary"  type="button" id="btnSaveCustomer">Add New Customer Details</button>
+            <button class="btn btn-success"  type="button" id="btnGetAllCustomer">Get All Customer</button>
+            <button class="btn btn-warning"  type="button"  id="btnRegCustomerUpdate">Update Customer</button>
             <div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegCusID">Customer ID</label>
-                    <input class="form-control" id="txtRegCusID" name="Regid" placeholder="Customer ID" type="text">
+                    <input class="form-control" id="txtRegCusID" name="regid" placeholder="Customer ID" type="text">
                     <p><small class="text-danger pl-1" id="lblcusid"></small></p>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegCusName">Customer Name</label>
-                    <input class="form-control" id="txtRegCusName" name="Regname" placeholder="Customer Name" type="text">
+                    <input class="form-control" id="txtRegCusName" name="regname" placeholder="Customer Name" type="text">
                     <p><small class="text-danger pl-1" id="lblcusname"></small></p>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegAddress">Customer Address</label>
-                    <input class="form-control" id="txtRegAddress" name="Regaddress" placeholder="Customer Address" type="text">
+                    <input class="form-control" id="txtRegAddress" name="regaddress" placeholder="Customer Address" type="text">
                     <p><small class="text-danger pl-1" id="lblcusaddress"></small></p>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegEmail">Customer Email</label>
-                    <input class="form-control" id="txtRegEmail" name="Regemail" placeholder="Customer Email" type="text">
+                    <input class="form-control" id="txtRegEmail" name="regemail" placeholder="Customer Email" type="text">
                     <p><small class="text-danger pl-1" id="lblcusEmail"></small></p>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegContact">Customer Contact</label>
-                    <input class="form-control" id="txtRegContact" name="Regcontact" placeholder="Customer Contact" type="text">
+                    <input class="form-control" id="txtRegContact" name="regcontact" placeholder="Customer Contact" type="text">
                     <p><small class="text-danger pl-1" id="lblcuscontact"></small></p>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="txtRegNIC">Customer NIC</label>
-                    <input class="form-control" id="txtRegNIC" name="RegNIC" placeholder="Customer NIC" type="text">
+                    <input class="form-control" id="txtRegNIC" name="regNIC" placeholder="Customer NIC" type="text">
                     <p><small class="text-danger pl-1" id="lblcusNIC"></small></p>
                 </div>
 
 
 
                 <div class="modal-footer">
-                    <button class="btn btn-danger" id="btnDeleteCustomer" type="submit">Delete</button>
+                    <button class="btn btn-danger" id="btnDeleteCustomer" type="Button">Delete</button>
                     <button class="btn btn-secondary" id="btnClearDeleteCustomerFormFields" type="reset">Clear</button>
                 </div>
             </div>
@@ -157,11 +157,12 @@
       });
 
       $("#btnGetAllCustomer").click(function () {
-          console.log("click");
+
           loadAllCustomers();
       });
 
       $("#btnDeleteCustomer").click(function () {
+
           deleteCustomer();
       });
 
@@ -176,20 +177,20 @@
         function bindClickEvents() {
             $("#RegcusTable>tr").click(function () {
               // This is Get values to the selected row
-                let Regid = $(this).children().eq(0).text();
-                let Regname = $(this).children().eq(1).text();
-                let Regaddress = $(this).children().eq(2).text();
-                let Regemail = $(this).children().eq(3).text();
-                let Regcontact = $(this).children().eq(4).text();
-                let RegNIC = $(this).children().eq(5).text();
+                let regid = $(this).children().eq(0).text();
+                let regname = $(this).children().eq(1).text();
+                let regaddress = $(this).children().eq(2).text();
+                let regemail = $(this).children().eq(3).text();
+                let regcontact = $(this).children().eq(4).text();
+                let regNIC = $(this).children().eq(5).text();
 
                 //Set values to the text-fields
-                $("#txtRegCusID").val(Regid);
-                $("#txtRegCusName").val(Regname);
-                $("#txtRegAddress").val(Regaddress);
-                $("#txtRegEmail").val(Regemail);
-                $("#txtRegContact").val(Regcontact);
-                $("#txtRegNIC").val(RegNIC);
+                $("#txtRegCusID").val(regid);
+                $("#txtRegCusName").val(regname);
+                $("#txtRegAddress").val(regaddress);
+                $("#txtRegEmail").val(regemail);
+                $("#txtRegContact").val(regcontact);
+                $("#txtRegNIC").val(regNIC);
 
             });
 
@@ -207,10 +208,7 @@
                  success: function (res) {
                      if (res.code==200){
                          alert("Save Customer");
-                     } else {
-                         alert("Already Save");
                      }
-
                  },
                  error:function (ob) {
                      alert(ob.responseJSON.message);
@@ -218,21 +216,22 @@
                  }
              });
        }
+//-------------------------------------------------------------------------------------------------------------------------------------
     //load all RegCustomers
     function loadAllCustomers(){
         $("#RegcusTable").empty();
         $.ajax({
             url:basecustomer,
             method:"GET",
-            /*dataType:This is a Json,Please Convert the json */
 
             success: function(resp) {
-
                 for (const regcustomer of resp.data){
-                   let row = `<tr> <td>${regcustomer.Regid}</td> <td>${regcustomer.Regname}</td> <td>${regcustomer.Regaddress}</td><td>${regcustomer.Regemail}</td><td>${regcustomer.Regcontact}</td><td>${regcustomer.RegNIC}</td></tr>`;
+                   let row = `<tr><td>${regcustomer.regid}</td> <td>${regcustomer.regname}</td> <td>${regcustomer.regaddress}</td><td>${regcustomer.regemail}</td><td>${regcustomer.regcontact}</td><td>${regcustomer.regNIC}</td></tr>`;
                     $("#RegcusTable").append(row);
 
                 }
+                bindClickEvents();
+                clearForm();
             },
             error :  function (ob) {
                 alert(ob.responseJSON.message);
@@ -240,12 +239,13 @@
             }
         });
     }
+//------------------------------------------------------------------------------------------------------------------------------------------
      // deletecustomer
     function deleteCustomer() {
-        let regcustomerID = $("#txtCusID").val();
+        let regcustomerID = $("#txtSearchRegCusID").val();
 
          $.ajax({
-             url: basecustomer + "?Regid=" + regcustomerID,
+             url: basecustomer + "?regid=" + regcustomerID,
              method:"DELETE",
              success: function (res) {
                   if (res.code == 200) {
@@ -261,16 +261,16 @@
               }
          });
     }
-
+//------------------------------------------------------------------------------------------------------------------------------------
       //Update Customer
      function  UpdateCustomer(){
        var cusDb = {
-           Regid : $("#txtRegCusID").val(),
-           Regname : $("#txtRegCusName").val(),
-           Regaddress : $("#txtRegAddress").val(),
-           Regemail : $("#txtRegEmail").val(),
-           Regcontact : $("#txtRegContact").val(),
-           RegNIC  : $("#txtRegNIC").val()
+           regid : $("#txtRegCusID").val(),
+           regname : $("#txtRegCusName").val(),
+           regaddress : $("#txtRegAddress").val(),
+           regemail : $("#txtRegEmail").val(),
+           regcontact : $("#txtRegContact").val(),
+           regNIC  : $("#txtRegNIC").val()
        }
 
        $.ajax({

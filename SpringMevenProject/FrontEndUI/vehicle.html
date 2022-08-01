@@ -52,7 +52,7 @@
             <div class="mb-3">
                 <form class="d-flex">
                     <label class="form-label" for="txtSearchCusID">Search Vehicle</label>
-                    <input class="form-control" id="txtSearchCusID" placeholder="Vehicle ID,Type" type="text">
+                    <input class="form-control" id="txtSearchCusID" placeholder="Vehicle ID" type="text">
 
                 </form>
             </div>
@@ -69,10 +69,10 @@
         </div>
 
         <div class="col-12 col-md-5">
-            <form class ="Vehicleform">
-            <button class="btn btn-primary" id="btnSaveVehicle">Add New Vehicle Details</button>
-            <button class="btn btn-success" id="btnSearchVehicle">Search Vehicle</button>
-            <button class="btn btn-warning" id="btnUpdate">Update Vehicle</button>
+            <form id="vehicleForm">
+            <button class="btn btn-primary" type="button" id="btnSaveVehicle">Add New Vehicle Details</button>
+            <button class="btn btn-success" type="button" id="btnGetAllVehicles">Get All Vehicles</button>
+            <button class="btn btn-warning" type="button" id="btnVehicleUpdate">Update Vehicle</button>
             <div>
 
                 <div class="mb-3">
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-danger" id="btnDeleteVehicle" type="submit">Delete</button>
+                    <button class="btn btn-danger" id="btnDeleteVehicle" type="button">Delete</button>
                     <button class="btn btn-secondary" id="btnClearDeleteVehiclesFormFields" type="reset">Clear</button>
                 </div>
             </div>
@@ -147,13 +147,13 @@
 <script src="assets/JQuery/jquery-3.6.0.min.js"></script>
 <script>
      var baseVehicleUrl = "http://localhost:8080/SpringMevenProject_war/vehicle"
-
+//-------------------------------------------------------------------------------------------------------------------------------
     $("#btnSaveVehicle").click(function () {
           SaveVehicle();
     });
 
      function SaveVehicle() {
-         var data = $("#Vehicleform").serialize();
+         var data = $("#vehicleForm").serialize();
          $.ajax({
              url:baseVehicleUrl,
              method:"POST",
@@ -170,6 +170,119 @@
          });
 
      }
+//-------------------------------------------------------------------------------------------------------------------------------
+    $("#btnGetAllVehicles").click(function () {
+         loadAllVehicles();
+    });
+
+     function loadAllVehicles() {
+         $("#vehTable").empty();
+         $.ajax({
+             url:baseVehicleUrl,
+             method:"GET",
+             success:function (resp) {
+                  for (const vehicle of resp.data) {
+                      let row = `<tr><td>${vehicle.vid}</td> <td>${vehicle.vtype}</td> <td>${vehicle.vbrand}</td><td>${vehicle.passanger}</td><td>${vehicle.fualtype}</td><td>${vehicle.transmissiontype}</td></tr>`;
+                      $("#vehTable").append(row);
+                  }
+                  vehiclebindClickEvent();
+                  vehicleclearform();
+
+             },
+             error:function (ob){
+                 alert(ob.responseJSON.message);
+             }
+         });
+
+     }
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+     function vehiclebindClickEvent() {
+         $("#vehTable>tr").click(function () {
+            let vid = $(this).children().eq(0).text();
+            let vtype = $(this).children().eq(1).text();
+            let vbrand = $(this).children().eq(2).text();
+            let passanger = $(this).children().eq(3).text();
+            let fualtype = $(this).children().eq(4).text();
+            let transmissiontype = $(this).children().eq(5).text();
+
+            $("#txtvehicleID").val(vid);
+            $("#txtvehicletype").val(vtype);
+            $("#txtvehiclebrand").val(vbrand);
+            $("#txtPasssengers").val(passanger);
+            $("#txtFueltype").val(fualtype);
+            $("#txtTransmissiontype").val(transmissiontype);
+         });
+     }
+ //-------------------------------------------------------------------------------------------------------------------------------------
+    $("#btnDeleteVehicle").click(function () {
+         deletevehicle();
+    });
+
+     function deletevehicle() {
+         let vehicleId = $("#txtvehicleID").val();
+         $.ajax({
+             url:baseVehicleUrl + "?vid=" + vehicleId,
+             method:"DELETE",
+             success:function (res) {
+                 if (res.code==200){
+                     alert("Vehicles Successfully Deleted");
+                     loadAllVehicles();
+                     vehicleclearform();
+                 }
+             },
+            error:function (ob) {
+                 alert(ob.responseJSON.message);
+
+            }
+         });
+
+     }
+ //-----------------------------------------------------------------------------------------------------------------------------------------------
+ $("#btnVehicleUpdate") .click(function () {
+      updateVehicle();
+ });
+
+   function updateVehicle() {
+       var vehicleob= {
+           vid: $("#txtvehicleID").val(),
+           vtype: $("#txtvehicletype").val(),
+           vbrand: $("#txtvehiclebrand").val(),
+           passanger: $("#txtPasssengers").val(),
+           fualtype: $("#txtFueltype").val(),
+           transmissiontype: $("#txtTransmissiontype").val(),
+       }
+      $.ajax({
+          url:baseVehicleUrl,
+          method:"PUT",
+          contentType: "application/json",
+          data:JSON.stringify(vehicleob),
+          success: function (res) {
+              if (res.code == 200) {
+                  alert("Siccessfully Updated");
+                  loadAllVehicles();
+                  vehicleclearform()
+              }
+
+          },
+          error: function (ob) {
+              alert(ob.responseJSON.message);
+
+          }
+      });
+   }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+   function vehicleclearform(){
+       $("#txtvehicleID").val();
+       $("#txtvehicletype").val();
+       $("#txtvehiclebrand").val();
+       $("#txtPasssengers").val();
+       $("#txtFueltype").val();
+       $("#txtTransmissiontype").val();
+
+
+   }
+
 
 </script>
 </body>

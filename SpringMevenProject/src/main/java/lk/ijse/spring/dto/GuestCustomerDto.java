@@ -10,10 +10,10 @@ import lombok.ToString;
 @Data
 @ToString
 public class GuestCustomerDto {
-    private String Gueid;
-    private String Guename;
-    private String Guewaddress;
-    private String GueNIC;
-    private String Gueemail;
-    private String Guecontact;
+    private String gueid;
+    private String guename;
+    private String guewaddress;
+    private String gueNIC;
+    private String gueemail;
+    private String guecontact;
 }

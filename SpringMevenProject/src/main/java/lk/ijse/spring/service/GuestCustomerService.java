@@ -7,7 +7,7 @@ import java.util.List;
 public interface GuestCustomerService {
     void saveGuestCustomer(GuestCustomerDto dto);
 
-    void deleteGuestCustomer(String dto);
+    void deleteGuestCustomer(String id);
 
     void updateGuestCustomer(GuestCustomerDto dto);
 
