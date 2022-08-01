@@ -53,8 +53,8 @@
             <h1 class="text-secondary"> Guest Customer Form</h1>
             <div class="mb-3">
                 <form class="d-flex">
-                    <label class="form-labe" for="txtSearchCusID">Search Customer</label>
-                    <input class="form-control" id="txtSearchCusID" placeholder="Customer ID" type="text">
+                    <button class="btn btn-dark"  type="button"  id="btnGueCustomerSearch">Search Guest Customer</button>
+                    <input class="form-control" id="txtSearchGueCusID" placeholder="Customer ID" type="text">
 
                 </form>
             </div>
@@ -280,6 +280,37 @@
         });
 
     }
+//-----------------------------------------------------------------------------------------------------------------------------------
+  $("#btnGueCustomerSearch").click(function () {
+      searchGuestCustomer();
+  });
+   function searchGuestCustomer(){
+       var GuecusId= $("#txtSearchGueCusID").val();
+       $.ajax({
+           url:baseGuestcustomer + "/" + GuecusId,
+           method:"GET",
+           success: function (res) {
+               if (res.code==200){
+                   var guecustomer = res.data;
+                   $("#txtGueCusID").val(guecustomer.gueid);
+                   $("#txtGueName").val(guecustomer. guename);
+                   $("#txtGueAddress").val(guecustomer. guewaddress);
+                   $("#txtGueNIC").val(guecustomer. gueNIC);
+                   $("#txtGueEmail").val(guecustomer. gueemail );
+                   $("#txtGueContact").val(guecustomer.guecontact);
+               } else {
+                   clearGuestForm();
+                   loadAllGuestCustomers();
+               }
+
+           },
+           error:function (ob) {
+               alert(ob.responseJSON.message);
+
+           }
+       });
+   }
+
 //----------------------------------------------------------------------------------------------------------------------------
     function clearGuestForm(){
         $("#txtGueCusID").val("");

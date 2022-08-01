@@ -52,8 +52,8 @@
             <h1 class="text-secondary"> Add Driver Details Form</h1>
             <div class="mb-3">
                 <form class="d-flex">
-                    <label class="form-label" for="txtSearchDriverID">Search Driver</label>
-                    <input class="form-control" id="txtSearchDriverID" placeholder="Driver ID,Name,NIC" type="text">
+                    <button class="btn btn-dark"  type="button"  id="btnDriverSearch">Search Driver</button>
+                    <input class="form-control" id="txtSearchDriverID" placeholder="Driver ID" type="text">
 
                 </form>
             </div>
@@ -275,6 +275,42 @@
           }
       });
     }
+//-----------------------------------------------------------------------------------------------------------------------------
+ $("#btnDriverSearch").click(function () {
+      searchDriver();
+ });
+    function searchDriver() {
+         var driId = $("#txtSearchDriverID").val();
+         $.ajax({
+            url: basedriver +"/" + driId,
+            method:"GET",
+            success: function (res) {
+                if (res.code==200){
+                    var ddriver = res.data;
+                    $("#txtdriverID").val(ddriver.did);
+                    $("#txtdrivername").val(ddriver.dname);
+                    $("#txtdriverNIC").val(ddriver.daddress);
+                    $("#txtdriverNIC").val(ddriver.dNIC);
+                    $("#txtdrivinglicence").val(ddriver.dlicence);
+                    $("#txtdrivercontact").val(ddriver.dcontact);
+
+                } else {
+                    driverclearform();
+                    loadAllDrivers();
+                }
+
+            },
+             error:function (ob) {
+                alert(ob.responseJSON.message);
+
+             }
+         });
+    }
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
     function driverclearform() {
         $("#txtdriverID").val("");

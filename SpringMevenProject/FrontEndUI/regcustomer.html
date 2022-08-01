@@ -51,8 +51,8 @@
             <h1 class="text-secondary"> Register Customer Form</h1>
             <div class="mb-3">
                 <form class="d-flex">
-                    <label class="form-label" for="txtSearchRegCusID">Search Customer</label>
-                    <input class="form-control" id="txtSearchRegCusID" placeholder="Customer ID" type="text">
+                    <button class="btn btn-dark"  type="button"  id="btnRegCustomerSearch">Search Reg Customer</button>
+                    <input class="form-control" id="txtSearchRegCusID" placeholder="Register Customer ID" type="text">
 
                 </form>
             </div>
@@ -292,7 +292,38 @@
        });
 
      }
+//---------------------------------------------------------------------------------------------------------------------------------
+$("#btnRegCustomerSearch").click(function () {
+    searchRegCustomer();
+});
 
+  function   searchRegCustomer() {
+      var regcusid = $("#txtSearchRegCusID").val();
+      $.ajax({
+         url:basecustomer +"/"+ regcusid,
+          method:"GET",
+          success: function (res) {
+             if (res.code==200){
+                 var regcustomer = res.data;
+                 $("#txtRegCusID").val(regcustomer.regid);
+                 $("#txtRegCusName").val(regcustomer.regname);
+                 $("#txtRegAddress").val(regcustomer.regaddress);
+                 $("#txtRegEmail").val(regcustomer.regemail);
+                 $("#txtRegContact").val(regcustomer.regcontact);
+                 $("#txtRegNIC").val(regcustomer.regNIC);
+             } else {
+                 clearForm();
+                 loadAllCustomers();
+             }
+
+          },
+          error:function (ob) {
+             alert(ob.responseJSON.message);
+
+          }
+      });
+  }
+//-------------------------------------------------------------------------------------------------------------------------------
     function clearForm(){
         $("#txtRegCusID").val("");
         $("#txtRegCusName").val("");

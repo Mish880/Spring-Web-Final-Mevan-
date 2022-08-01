@@ -51,8 +51,8 @@
             <h1 class="text-secondary"> Add Vehicle Form</h1>
             <div class="mb-3">
                 <form class="d-flex">
-                    <label class="form-label" for="txtSearchCusID">Search Vehicle</label>
-                    <input class="form-control" id="txtSearchCusID" placeholder="Vehicle ID" type="text">
+                    <button class="btn btn-dark"  type="button"  id="btnVehicleSearch">Search Vehicles</button>
+                    <input class="form-control" id="txtSearchVehicle" placeholder="Vehicle ID" type="text">
 
                 </form>
             </div>
@@ -271,6 +271,39 @@
           }
       });
    }
+ //-------------------------------------------------------------------------------------------------------------------------------
+     $("#btnVehicleSearch").click(function () {
+
+         searchVehicle();
+     });
+     function  searchVehicle() {
+         var vehiclerId = $("#txtSearchVehicle").val();
+         $.ajax({
+            url: baseVehicleUrl +"/"+ vehiclerId,
+            method:"GET",
+            success: function (res) {
+                if (res.code ==200){
+                    var vehiclet = res.data;
+                    $("#txtvehicleID").val(vehiclet.vid);
+                    $("#txtvehicletype").val(vehiclet.vtype);
+                    $("#txtvehiclebrand").val(vehiclet.vbrand);
+                    $("#txtPasssengers").val(vehiclet.passanger);
+                    $("#txtFueltype").val(vehiclet.fualtype);
+                    $("#txtTransmissiontype").val(vehiclet.transmissiontype);
+
+                } else {
+                    vehicleclearform();
+                    loadAllVehicles();
+                }
+
+            },
+             error: function (ob) {
+                alert(ob.responseJSON.message);
+
+             }
+         });
+
+     }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
    function vehicleclearform(){
        $("#txtvehicleID").val();
