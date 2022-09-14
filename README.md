@@ -8,7 +8,7 @@
 ![Spring Mevan Project customer page](https://user-images.githubusercontent.com/68801545/190100943-d3b9ce3b-58ab-4d28-92eb-74940425c7fe.PNG)
 
  ## Using Tools
- -IDE :- Interlij Idea 2020.1.1
- -Server :- Apache Tom Cat Server 8
- -Framework :- SpringFramework
- -Database :- My SQL 5.5
+ - IDE :- Interlij Idea 2020.1.1
+ - Server :- Apache Tom Cat Server 8
+ - Framework :- SpringFramework
+ - Database :- My SQL 5.5
