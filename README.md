@@ -1,1 +1,1 @@
-🔰 Restaurant Management System With MVC Project...!
+🔰 Pos System for shopping store with Spring web Final Mevan Project...!
